@@ -761,6 +761,220 @@
        HORSES / CAROUSEL TILES
     ============================================================ */
 
+    /* ============================================================
+       FEATURED NEWS CARDS
+    ============================================================ */
+    .news-section {
+      background: var(--deep);
+      padding: 6rem clamp(2rem, 7vw, 8rem);
+      border-top: 1px solid var(--mid);
+    }
+    .news-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 4rem;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .news-header-left {}
+    .news-header-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      font-weight: 700; line-height: 0.92;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--black); margin-bottom: 0.5rem;
+    }
+    .news-header-title em { font-style: normal; color: var(--gold); }
+    .news-header-sub {
+      font-family: var(--font-body);
+      font-size: var(--text-body); font-weight: 300;
+      letter-spacing: var(--ls-body); color: var(--warm-grey);
+      max-width: 420px;
+    }
+    .news-view-all {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-body); font-size: var(--text-ui); font-weight: 400;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--gold); border-bottom: 1px solid rgba(232,98,26,0.35);
+      padding-bottom: 2px;
+      transition: border-color 0.25s, opacity 0.25s;
+      white-space: nowrap;
+    }
+    .news-view-all:hover { opacity: 0.7; border-color: var(--gold); }
+
+    /* Featured grid: 1 hero card left, 2 stacked right */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.4rem;
+    }
+    .news-card {
+      background: var(--parchment);
+      border-radius: 16px;
+      border: 1px solid var(--mid);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s;
+      cursor: pointer;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 56px rgba(0,0,0,0.12), 0 0 0 1px rgba(232,98,26,0.18);
+      border-color: rgba(232,98,26,0.35);
+    }
+    /* Hero card spans full column-height */
+    .news-card--hero {
+      grid-row: 1 / 3;
+      flex-direction: column;
+    }
+    .news-card--hero .news-card-img {
+      aspect-ratio: 4/5;
+    }
+    .news-card--side .news-card-img {
+      aspect-ratio: 16/9;
+    }
+    .news-card-img {
+      position: relative; overflow: hidden;
+      background: var(--section-dark);
+      flex-shrink: 0;
+    }
+    .news-card-img-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .news-card:hover .news-card-img-bg { transform: scale(1.05); }
+    .news-card-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,8,0.55) 0%, transparent 55%);
+    }
+    /* Gradient SVG placeholder images */
+    .news-img-1 { background: linear-gradient(145deg,#2a1808 0%,#3a2010 40%,#1a1208 100%); }
+    .news-img-2 { background: linear-gradient(145deg,#0a1a2a 0%,#1a2a3a 40%,#0a1020 100%); }
+    .news-img-3 { background: linear-gradient(145deg,#1a2a0a 0%,#2a3a10 40%,#0a1a08 100%); }
+
+    .news-card-category-badge {
+      position: absolute; top: 1.1rem; left: 1.1rem; z-index: 2;
+      font-family: var(--font-body); font-size: var(--text-label); font-weight: 600;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--white); background: var(--gold);
+      padding: 0.28rem 0.8rem; border-radius: 4px;
+    }
+    .news-card-body {
+      padding: 2rem 2rem 2.2rem;
+      display: flex; flex-direction: column; flex: 1;
+    }
+    .news-card-meta {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+    .news-card-date {
+      font-family: var(--font-body); font-size: 0.58rem; font-weight: 400;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--warm-grey);
+    }
+    .news-card-dot {
+      width: 3px; height: 3px; border-radius: 50%; background: var(--mid);
+    }
+    .news-card-read-time {
+      font-family: var(--font-body); font-size: 0.58rem; font-weight: 400;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--warm-grey);
+    }
+    .news-card-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+      color: var(--black); line-height: 1.05; margin-bottom: 0.9rem;
+    }
+    .news-card--side .news-card-title {
+      font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+    }
+    .news-card-excerpt {
+      font-family: var(--font-body); font-size: var(--text-sub); font-weight: 300;
+      line-height: 1.8; letter-spacing: var(--ls-body);
+      color: var(--light-grey); flex: 1; margin-bottom: 1.5rem;
+    }
+    .news-card-cta {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-family: var(--font-body); font-size: var(--text-label); font-weight: 500;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--gold);
+      transition: gap 0.25s;
+    }
+    .news-card:hover .news-card-cta { gap: 0.85rem; }
+    .news-card-cta-arrow { font-size: 0.85rem; }
+
+    /* Available horses carousel at bottom of article page */
+    .news-horses-carousel {
+      margin-top: 4rem;
+      padding-top: 4rem;
+      border-top: 1px solid var(--mid);
+    }
+    .news-horses-label {
+      font-family: var(--font-body); font-size: var(--text-label); font-weight: 500;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .news-horses-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--black); margin-bottom: 2.5rem;
+    }
+    .news-horses-title em { font-style: normal; color: var(--gold); }
+    .news-horses-strip {
+      display: flex; gap: 1.2rem; overflow-x: auto; padding-bottom: 1rem;
+      scrollbar-width: none;
+    }
+    .news-horses-strip::-webkit-scrollbar { display: none; }
+    .news-horse-chip {
+      flex: 0 0 220px; border-radius: 12px; overflow: hidden;
+      background: var(--parchment); border: 1px solid var(--mid);
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .news-horse-chip:hover {
+      border-color: rgba(232,98,26,0.4);
+      transform: translateY(-3px);
+    }
+    .news-horse-chip-img {
+      width: 100%; aspect-ratio: 3/2;
+      background: linear-gradient(145deg,#1a1208 0%,#2a1a10 100%);
+      position: relative; overflow: hidden;
+    }
+    .news-horse-chip-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+    }
+    .news-horse-chip-body { padding: 1rem 1.1rem 1.2rem; }
+    .news-horse-chip-name {
+      font-family: var(--font-title); font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--black); margin-bottom: 0.25rem;
+    }
+    .news-horse-chip-detail {
+      font-family: var(--font-body); font-size: 0.58rem; font-weight: 400;
+      letter-spacing: var(--ls-wide); text-transform: uppercase;
+      color: var(--warm-grey); margin-bottom: 0.8rem;
+    }
+    .news-horse-chip-cta {
+      display: flex; align-items: center; gap: 0.45rem;
+      font-family: var(--font-body); font-size: 0.55rem; font-weight: 500;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    @media (max-width: 900px) {
+      .news-grid { grid-template-columns: 1fr; }
+      .news-card--hero { grid-row: auto; }
+      .news-card--hero .news-card-img { aspect-ratio: 16/9; }
+    }
+    @media (max-width: 600px) {
+      .news-section { padding: 4rem clamp(1.5rem, 5vw, 3rem); }
+      .news-header { flex-direction: column; align-items: flex-start; }
+    }
+
     .tiles-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -851,34 +1065,34 @@
 
     .syndicates-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.4rem;
-      margin-top: 4rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+      margin-top: 3.5rem;
     }
 
-    /* ── SYNDICATE CARD — photo-first ── */
+    /* ── SYNDICATE CARD — photo-first, more compact ── */
     .syndicate-card {
       position: relative; overflow: hidden;
       background: var(--parchment);
-      border-radius: 16px;
+      border-radius: 14px;
       border: 1px solid var(--mid);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 14px rgba(0,0,0,0.06);
       transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s;
       cursor: pointer;
       display: flex; flex-direction: column;
     }
     .syndicate-card:hover {
       border-color: rgba(232,98,26,0.4);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.14), 0 0 0 1px rgba(232,98,26,0.2);
-      transform: translateY(-5px);
+      box-shadow: 0 12px 38px rgba(0,0,0,0.12), 0 0 0 1px rgba(232,98,26,0.18);
+      transform: translateY(-4px);
     }
 
-    /* Horse photo at top */
+    /* Horse photo at top — tighter aspect */
     .syndicate-photo {
       position: relative;
       width: 100%; aspect-ratio: 3/2;
       overflow: hidden;
-      border-radius: 16px 16px 0 0;
+      border-radius: 14px 14px 0 0;
       background: var(--section-dark);
       flex-shrink: 0;
     }
@@ -913,7 +1127,7 @@
 
     /* Card body */
     .syndicate-body {
-      padding: 2rem 2rem 2.2rem;
+      padding: 1.5rem 1.6rem 1.8rem;
       display: flex; flex-direction: column; flex: 1;
     }
     .syndicate-number {
@@ -1503,7 +1717,7 @@
     @media (max-width: 1100px) {
       .tiles-grid { grid-template-columns: repeat(2, 1fr); }
       .tiles-grid .tile:last-child { display: none; }
-      .syndicates-grid { grid-template-columns: 1fr; }
+      .syndicates-grid { grid-template-columns: repeat(2, 1fr); }
       .trainer-section { grid-template-columns: 1fr; border-radius: 12px; margin: 0 1.5rem; }
       .trainer-visual { min-height: 360px; }
       .trainer-copy { padding: 3.5rem 2.5rem; }
@@ -1530,7 +1744,7 @@
       .success-section { padding: 5rem 0 5rem clamp(1.5rem, 5vw, 3rem); }
       .success-header { padding: 0 clamp(1.5rem, 5vw, 3rem) 2.5rem; }
       /* Syndicates */
-      .syndicates-grid { gap: 1rem; }
+      .syndicates-grid { grid-template-columns: 1fr; gap: 1rem; }
       /* Races */
       .race-item { grid-template-columns: 70px 1fr; gap: 1rem; padding: 1.2rem 1.2rem; }
       .race-details, .race-status { display: none; }
@@ -1779,8 +1993,7 @@
     .team-section-header {
       padding: 0 clamp(2rem, 7vw, 8rem) 3.5rem;
       display: flex; align-items: flex-end; justify-content: space-between;
-    }
-    .team-section-title {
+    }    .team-section-title {
       font-family: var(--font-title);
       font-size: clamp(2.4rem, 4vw, 4rem);
       font-weight: 700; line-height: 0.92;
@@ -1810,14 +2023,15 @@
       padding: 2.5rem 0 1.5rem;
     }
     .team-viewport::before, .team-viewport::after {
-      content:''; position:absolute; top:0; bottom:0; width:180px; z-index:10; pointer-events:none;
+      content:''; position:absolute; top:0; bottom:0; width:60px; z-index:10; pointer-events:none;
     }
     .team-viewport::before { left:0; background:linear-gradient(to right, var(--deep), transparent); }
     .team-viewport::after  { right:0; background:linear-gradient(to left,  var(--deep), transparent); }
     .team-track {
       display: flex; align-items: flex-end;
-      padding: 0 clamp(3rem,10vw,12rem);
+      padding: 0 clamp(1rem,5vw,6rem);
       gap: 1.4rem; will-change: transform;
+      justify-content: flex-start;
     }
     .team-card {
       flex: 0 0 240px; position: relative;
@@ -2202,6 +2416,8 @@
       .process-benefits-header { grid-template-columns: 1fr; gap: 1.5rem; }
       .process-benefits-grid { grid-template-columns: 1fr; }
       .process-promise-grid { grid-template-columns: 1fr; }
+      .process-video-section { grid-template-columns: 1fr; gap: 3rem; }
+      .process-video-frame { max-width: 260px; }
     }
     @media (max-width: 600px) {
       .process-steps { grid-template-columns: 1fr; }
@@ -2313,12 +2529,17 @@
     }
 
 
-    /* ── PROCESS VIDEO REEL ── */
+    /* ── PROCESS VIDEO REEL — vertical 9:16 social format ── */
     .process-video-section {
       margin-bottom: 5rem;
       padding-bottom: 5rem;
       border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
     }
+    .process-video-section-left {}
     .process-video-label {
       font-family: var(--font-body);
       font-size: var(--text-label); font-weight: 500;
@@ -2327,18 +2548,47 @@
     }
     .process-video-title {
       font-family: var(--font-title);
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-size: clamp(2rem, 3.5vw, 3rem);
       font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-      color: var(--white); margin-bottom: 2rem;
+      color: var(--white); margin-bottom: 1.2rem;
     }
     .process-video-title em { font-style: normal; color: var(--gold); }
+    .process-video-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-body); font-weight: 300;
+      line-height: 1.9; letter-spacing: var(--ls-body);
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 2rem;
+    }
+    .process-video-stats {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+    }
+    .process-video-stat {
+      display: flex; flex-direction: column;
+    }
+    .process-video-stat-num {
+      font-family: var(--font-title);
+      font-size: 2rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .process-video-stat-label {
+      font-family: var(--font-body);
+      font-size: 0.55rem; font-weight: 400;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    /* 9:16 vertical reel container — social-first */
     .process-video-frame {
       position: relative;
-      width: 100%; aspect-ratio: 16/9;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      aspect-ratio: 9/16;
       background: #000;
-      border-radius: 14px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border-radius: 24px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(232,98,26,0.15);
     }
     /* iframe fills frame when embedded */
     .process-video-frame iframe {
@@ -3156,6 +3406,678 @@
       .position-badge { display: none; }
     }
 
+    /* ============================================================
+       PREMIUM UX REFINEMENTS — Mobile-first polish pass
+    ============================================================ */
+
+    /* ── FOCUS VISIBLE — accessible keyboard nav ── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    /* ── SMOOTH COLOUR TRANSITIONS on links/buttons ── */
+    a, button { transition: color 0.22s ease, opacity 0.22s ease, background 0.22s ease; }
+
+    /* ── SECTION PADDING NORMALISATION ── */
+    .section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 7vw, 8rem); }
+    .news-section { padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 7vw, 8rem); }
+    .facilities-section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 7vw, 8rem); }
+    .process-section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 7vw, 8rem); }
+    .team-section { padding: clamp(4rem, 8vw, 6rem) 0; }
+
+    /* ── SECTION HEADER TIGHTENING ── */
+    .section-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+    .section-overline { margin-bottom: 0.6rem; }
+    .section-title { margin-bottom: 0.75rem; }
+    .section-intro { max-width: 560px; margin: 0 auto; }
+
+    /* ── GOLD RULE CENTERING CONSISTENCY ── */
+    .gold-rule { margin: 0 auto 1.5rem; }
+
+    /* ── HERO IMPROVEMENTS ── */
+    .hero-copy {
+      max-width: min(680px, 90vw);
+      left: clamp(1.5rem, 7vw, 8rem);
+    }
+    .hero-cta {
+      border-radius: 6px;
+      padding: 1rem 2rem;
+    }
+    /* Nav dock — better mobile layout */
+    .hero-nav-dock {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .hero-nav-dock::-webkit-scrollbar { display: none; }
+    .hero-dock-item {
+      min-width: 120px;
+      padding: 1.2rem 1.3rem 1.3rem;
+      min-height: 76px;
+    }
+    .hero-dock-number { font-size: 0.58rem; }
+    .hero-dock-label { font-size: 0.7rem; }
+    .hero-dock-sub { font-size: 0.55rem; }
+
+    /* ── NAVIGATION MOBILE — hamburger tap target ── */
+    .nav-menu-btn, .nav-dealer-btn {
+      min-height: 44px;
+      padding: 0.5rem 0;
+    }
+    @media (max-width: 768px) {
+      .nav-inner { padding: 0 1.2rem; }
+      .nav-keyline { margin: 0 1.2rem; }
+      .hero-copy { left: 1.5rem; transform: translateY(-52%); max-width: calc(100vw - 3rem); }
+      .hero-title { font-size: clamp(3rem, 11vw, 7rem); }
+      .hero-tagline { font-size: 0.55rem; letter-spacing: 0.28em; }
+      .hero-cta { font-size: 0.6rem; padding: 0.9rem 1.6rem; }
+      .hero-dock-item { min-width: 110px; padding: 1rem 1.1rem; }
+    }
+
+    /* ── HONOUR ROLL — smoother fade edges on mobile ── */
+    @media (max-width: 600px) {
+      .honour-roll::before, .honour-roll::after { width: 40px; }
+      .honour-roll-label { padding: 0 1rem 0 1.2rem; font-size: 0.6rem; }
+    }
+
+    /* ── NEWS GRID — better aspect ratio on tablet ── */
+    @media (max-width: 900px) {
+      .news-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .news-card--hero { grid-row: auto; }
+      .news-card--hero .news-card-img { aspect-ratio: 16/9; }
+      .news-header { margin-bottom: 2.5rem; }
+      .news-card-body { padding: 1.5rem 1.5rem 1.8rem; }
+    }
+    @media (max-width: 480px) {
+      .news-horses-strip { gap: 0.8rem; }
+      .news-horse-chip { flex: 0 0 190px; }
+    }
+
+    /* ── CARD CONSISTENCY — border-radius ── */
+    .news-card, .news-horse-chip, .facility-panel,
+    .syndicate-card, .benefit-card, .story-card,
+    .position-card, .tile { border-radius: 14px; }
+    .tile { border-radius: 14px; }
+    .panel { border-radius: 20px; }
+    .careers-form { border-radius: 14px; }
+    .careers-stat-row { border-radius: 10px; }
+    .process-promise { border-radius: 14px; }
+    .process-step { border-radius: 10px; }
+    .facilities-global-stats { border-radius: 12px; }
+    .hero-cta { border-radius: 6px; }
+    .form-input, .form-select, .form-textarea { border-radius: 8px; }
+    .form-submit { border-radius: 8px; }
+
+    /* ── SYNDICATE CARDS — mobile single column ── */
+    @media (max-width: 640px) {
+      .syndicates-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ── ABOUT STRIP — stack on mobile ── */
+    .about-strip {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    }
+    @media (max-width: 640px) {
+      .about-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        padding: 3rem 1.5rem;
+      }
+      .about-divider { display: none; }
+      .about-stat { padding: 1rem 1rem; }
+    }
+
+    /* ── TRAINER SECTION ── */
+    @media (max-width: 768px) {
+      .trainer-section { border-radius: 10px; }
+    }
+
+    /* ── FACILITIES — stat labels responsive ── */
+    @media (max-width: 480px) {
+      .facilities-global-stats { grid-template-columns: repeat(2, 1fr); }
+      .facility-stats { grid-template-columns: repeat(3, 1fr); }
+      .facility-stat-number { font-size: 1.6rem; }
+    }
+
+    /* ── PROCESS SECTION — steps mobile ── */
+    @media (max-width: 600px) {
+      .process-steps { grid-template-columns: 1fr; }
+      .process-step { padding: 1.8rem 1.4rem; }
+      .process-video-section { grid-template-columns: 1fr; }
+      .process-video-section-left { padding-right: 0; }
+    }
+
+    /* ── TEAM CAROUSEL DOTS — scroll indicator ── */
+    .team-scroll-hint { display: flex; align-items: center; gap: 0.5rem; }
+    @media (max-width: 768px) {
+      .team-section-header { padding: 0 1.5rem 2.5rem; gap: 0.8rem; }
+    }
+
+    /* ── CAREERS SECTION COMPACT REDESIGN ── */
+    .careers-section-compact {
+      background: var(--section-dark);
+      position: relative; overflow: hidden;
+    }
+
+    /* Careers hero — compact two-column with strong CTA */
+    .careers-compact-hero {
+      padding: clamp(4rem, 7vw, 6rem) clamp(1.5rem, 7vw, 8rem);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+    }
+    .careers-compact-hero::before {
+      content: 'JOIN';
+      position: absolute; right: -1rem; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-title);
+      font-size: clamp(6rem, 14vw, 16rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      color: rgba(255,255,255,0.02);
+      pointer-events: none; line-height: 1;
+    }
+    .careers-compact-overline {
+      font-family: var(--font-body);
+      font-size: var(--text-label); font-weight: 400;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem; display: block;
+    }
+    .careers-compact-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      font-weight: 700; line-height: 0.9;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .careers-compact-title em { font-style: normal; color: var(--gold); display: block; }
+    .careers-compact-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-body); font-weight: 300;
+      line-height: 1.8; letter-spacing: var(--ls-body);
+      color: rgba(255,255,255,0.5);
+      max-width: 520px;
+    }
+    .careers-compact-cta-area {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.2rem;
+      min-width: 220px;
+    }
+    .careers-compact-btn {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      font-family: var(--font-body);
+      font-size: var(--text-ui); font-weight: 500;
+      letter-spacing: var(--ls-wide); text-transform: uppercase;
+      padding: 1.1rem 2.2rem;
+      background: var(--gold); color: var(--white);
+      border-radius: 6px; border: none;
+      transition: background 0.25s, transform 0.2s;
+      white-space: nowrap;
+      width: 100%; text-align: center; justify-content: center;
+    }
+    .careers-compact-btn:hover { background: var(--gold-dark); transform: translateY(-2px); }
+    .careers-compact-btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: var(--text-label); font-weight: 400;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      padding: 0.85rem 1.8rem;
+      background: transparent; color: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.18); border-radius: 6px;
+      transition: border-color 0.25s, color 0.25s;
+      width: 100%; text-align: center;
+    }
+    .careers-compact-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .careers-compact-note {
+      font-family: var(--font-body);
+      font-size: 0.56rem; font-weight: 300;
+      letter-spacing: var(--ls-body); text-align: center;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* Compact perks strip */
+    .careers-compact-perks {
+      padding: 2rem clamp(1.5rem, 7vw, 8rem);
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: center;
+    }
+    .careers-compact-perks-label {
+      font-family: var(--font-body);
+      font-size: 0.56rem; font-weight: 500;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-right: 0.5rem;
+    }
+    .careers-compact-perk {
+      font-family: var(--font-body);
+      font-size: 0.58rem; font-weight: 400;
+      letter-spacing: var(--ls-caps); text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.32rem 0.75rem; border-radius: 20px;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .careers-compact-perk:hover { border-color: rgba(232,98,26,0.35); color: rgba(255,255,255,0.8); }
+    .careers-compact-perk::before {
+      content: ''; width: 4px; height: 4px;
+      border-radius: 50%; background: var(--gold); flex-shrink: 0;
+    }
+
+    /* Compact positions — collapsed by default */
+    .careers-compact-positions {
+      padding: 3rem clamp(1.5rem, 7vw, 8rem) 4rem;
+    }
+    .careers-compact-positions-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.8rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .careers-compact-positions-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--white);
+    }
+    .careers-compact-positions-title em { font-style: normal; color: var(--gold); }
+    .careers-positions-hint {
+      font-family: var(--font-body);
+      font-size: var(--text-label); font-weight: 300;
+      letter-spacing: var(--ls-body); color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .careers-compact-hero { grid-template-columns: 1fr; gap: 2.5rem; }
+      .careers-compact-cta-area { flex-direction: row; flex-wrap: wrap; min-width: auto; width: 100%; }
+      .careers-compact-btn, .careers-compact-btn-ghost { width: auto; flex: 1; }
+      .careers-compact-perks { padding: 1.5rem 1.5rem; }
+      .careers-compact-positions { padding: 2.5rem 1.5rem 3.5rem; }
+    }
+    @media (max-width: 480px) {
+      .careers-compact-cta-area { flex-direction: column; }
+      .careers-compact-btn, .careers-compact-btn-ghost { width: 100%; }
+    }
+
+    /* ── CONTACT SECTION — consistent padding ── */
+    #contact { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 7vw, 8rem); }
+
+    /* ── FOOTER — mobile fixes ── */
+    @media (max-width: 480px) {
+      .footer { padding: 3.5rem 1.5rem 2rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-legal { flex-wrap: wrap; gap: 1rem; }
+    }
+
+    /* ── CTA BAND — consistent rounding ── */
+    .cta-band { border-radius: 14px; }
+    @media (max-width: 768px) {
+      .cta-band { margin: 0 1rem 2rem; border-radius: 10px; }
+    }
+    @media (max-width: 480px) {
+      .cta-band { margin: 0 0.75rem 1.5rem; padding: 3.5rem 1.5rem; }
+    }
+
+    /* ── PANEL OVERLAY — safe area on mobile ── */
+    @media (max-width: 480px) {
+      .panel { border-radius: 14px; width: 100%; margin: 0; max-height: 95vh; }
+      .panel-body { padding: 1.6rem 1.4rem 3rem; }
+    }
+
+    /* ── IMPROVED SCROLL BEHAVIOR ── */
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 8px); }
+
+    /* ── BACK-TO-TOP BUTTON ── */
+    .back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gold); color: var(--white);
+      border: none; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; box-shadow: 0 4px 20px rgba(232,98,26,0.4);
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.25s;
+      pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .back-to-top:hover { background: var(--gold-dark); }
+    @media (hover: none) { .back-to-top { bottom: 1.5rem; right: 1.5rem; } }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── MOBILE CURSOR — hide custom cursor on touch ── */
+    @media (hover: none) {
+      * { cursor: auto !important; }
+      .cursor, .cursor-ring { display: none; }
+    }
+
+    /* ── GLOBAL MENU MOBILE ── */
+    @media (max-width: 768px) {
+      .global-menu { grid-template-columns: 1fr; }
+      .menu-right { display: none; }
+      .menu-left { padding: 0 2rem 2rem; justify-content: flex-start; padding-top: calc(var(--nav-h) + 2.5rem); }
+      .menu-nav-item { font-size: 0.72rem; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+      .menu-topbar { padding: 0 1.5rem; }
+    }
+
+    /* ── RACE ITEMS — touch targets ── */
+    .race-item { min-height: 64px; }
+
+    /* ── IMPROVED HOVER STATES ── */
+    .news-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .news-card:hover { transform: translateY(-4px); }
+    .facility-panel { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .tile { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .syndicate-card { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .benefit-card { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+
+    /* ── CONSISTENT SECTION DIVIDERS ── */
+    .news-section, .facilities-section, .syndicates-section,
+    .process-section, .team-section, .races-section, .news-horses-carousel {
+      border-top: 1px solid var(--mid);
+    }
+
+    /* ── IMPROVED BUTTON TOUCH TARGETS ── */
+    .hero-dock-item, .hero-cta, .form-submit,
+    .position-apply-btn, .careers-compact-btn { min-height: 44px; }
+    .panel-close { min-width: 44px; min-height: 44px; }
+
+    /* ── TYPOGRAPHY VERTICAL RHYTHM ── */
+    .section-intro { line-height: 1.85; }
+    .facility-desc-text { line-height: 1.85; }
+    .story-card-desc { line-height: 1.75; }
+
+    /* ── PROCESS VIDEO SECTION MOBILE ── */
+    @media (max-width: 900px) {
+      .process-video-section {
+        display: flex; flex-direction: column; gap: 3rem;
+      }
+      .process-video-frame { max-width: 260px; }
+    }
+
+    /* ============================================================
+       PANEL — AVAILABLE SHARES CAROUSEL
+       Renders inside the article slide panel beneath article body
+    ============================================================ */
+    .panel-shares {
+      border-top: 1px solid var(--mid);
+      padding: 2rem 0 0.5rem;
+      margin-top: 2rem;
+    }
+    .panel-shares-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 2rem 1.2rem;
+      gap: 1rem;
+    }
+    .panel-shares-overline {
+      font-family: var(--font-body);
+      font-size: var(--text-label);
+      font-weight: 500;
+      letter-spacing: var(--ls-caps);
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .panel-shares-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--black);
+      line-height: 1;
+    }
+    .panel-shares-title em { font-style: normal; color: var(--gold); }
+    .panel-shares-view-all {
+      font-family: var(--font-body);
+      font-size: var(--text-label);
+      font-weight: 400;
+      letter-spacing: var(--ls-caps);
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(232,98,26,0.3);
+      padding-bottom: 1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity 0.22s;
+    }
+    .panel-shares-view-all:hover { opacity: 0.65; }
+
+    /* Scrollable track */
+    .panel-shares-strip {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 0.25rem 2rem 1.5rem;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+    .panel-shares-strip::-webkit-scrollbar { display: none; }
+
+    /* Individual horse card */
+    .psc {
+      flex: 0 0 220px;
+      border-radius: 14px;
+      background: var(--parchment);
+      border: 1px solid var(--mid);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      scroll-snap-align: start;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      cursor: pointer;
+    }
+    .psc:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.1), 0 0 0 1px rgba(232,98,26,0.22);
+      border-color: rgba(232,98,26,0.35);
+    }
+    /* Image area */
+    .psc-img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .psc-img-bg {
+      position: absolute;
+      inset: -6%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+    .psc:hover .psc-img-bg { transform: scale(1.06); }
+    .psc-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,6,0.6) 0%, rgba(8,8,6,0.05) 60%);
+    }
+    /* Urgency badge — top left */
+    .psc-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 2;
+      font-family: var(--font-body);
+      font-size: 0.52rem;
+      font-weight: 600;
+      letter-spacing: var(--ls-caps);
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+    }
+    .psc-badge.urgent { background: var(--gold); }
+    .psc-badge.filling { background: var(--black); }
+    .psc-badge.bespoke {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.6);
+      color: var(--white);
+    }
+    /* Share % pill — bottom right of image */
+    .psc-avail {
+      position: absolute;
+      bottom: 0.7rem;
+      right: 0.75rem;
+      z-index: 2;
+      font-family: var(--font-body);
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: var(--ls-body);
+      color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(4px);
+      padding: 0.22rem 0.55rem;
+      border-radius: 3px;
+    }
+    /* Body */
+    .psc-body {
+      padding: 1rem 1.1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .psc-name {
+      font-family: var(--font-title);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.2rem;
+      line-height: 1;
+    }
+    .psc-breed {
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+      color: var(--warm-grey);
+      margin-bottom: 0.65rem;
+    }
+    .psc-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-label);
+      font-weight: 300;
+      line-height: 1.65;
+      letter-spacing: var(--ls-body);
+      color: var(--light-grey);
+      flex: 1;
+      margin-bottom: 0.8rem;
+    }
+    /* Progress bar */
+    .psc-progress {
+      margin-bottom: 0.85rem;
+    }
+    .psc-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-body);
+      font-size: 0.52rem;
+      font-weight: 400;
+      letter-spacing: var(--ls-caps);
+      text-transform: uppercase;
+      color: var(--warm-grey);
+      margin-bottom: 0.35rem;
+    }
+    .psc-progress-track {
+      width: 100%;
+      height: 4px;
+      background: var(--mid);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .psc-progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    /* CTA button */
+    .psc-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      border: none;
+      border-radius: 6px;
+      padding: 0.7rem 1rem;
+      transition: background 0.22s ease;
+      cursor: pointer;
+    }
+    .psc-cta:hover { background: var(--gold-dark); }
+    .psc-cta-arrow { transition: transform 0.22s ease; }
+    .psc:hover .psc-cta-arrow { transform: translateX(3px); }
+
+    /* Bespoke card — ghost CTA */
+    .psc-cta.ghost {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid rgba(232,98,26,0.4);
+    }
+    .psc-cta.ghost:hover { background: rgba(232,98,26,0.06); }
+
+    /* Scroll hint dots */
+    .panel-shares-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0 2rem 1rem;
+    }
+    .panel-shares-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--mid);
+      transition: background 0.25s, transform 0.25s;
+    }
+    .panel-shares-dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    /* Empty state */
+    .panel-shares-empty {
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: var(--text-sub);
+      font-weight: 300;
+      color: var(--warm-grey);
+      letter-spacing: var(--ls-body);
+    }
+
+    /* Mobile — slightly narrower cards on very small screens */
+    @media (max-width: 480px) {
+      .psc { flex: 0 0 195px; }
+      .panel-shares-header { padding: 0 1.4rem 1rem; }
+      .panel-shares-strip { padding: 0.25rem 1.4rem 1.5rem; gap: 0.8rem; }
+      .panel-shares-dots { padding: 0 1.4rem 0.75rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -3458,28 +4380,77 @@
 
 
 <!-- ============================================================
-     RECENT SUCCESS — Man Utd style card carousel
+     FEATURED NEWS & SUCCESS STORIES
 ============================================================ -->
-<section class="success-section" id="news">
+<section class="news-section" id="news">
 
-  <div class="success-header">
-    <div class="success-header-left">
-      <p class="section-overline" style="text-align:left; margin-bottom:0.8rem;">This Week's Scoreboard</p>
-      <h2 class="success-header-title">On The <em>Board</em></h2>
-      <p class="success-header-sub">Your horse. Your colours. Your moment. Every run counts when you're part of the squad.</p>
+  <div class="news-header fade-up">
+    <div class="news-header-left">
+      <p class="section-overline" style="text-align:left; margin-bottom:0.8rem;">Featured News &amp; Success Stories</p>
+      <h2 class="news-header-title">On The <em>Board</em></h2>
+      <p class="news-header-sub">The latest from the stable — wins, milestones, and the stories behind every horse.</p>
     </div>
-    <div class="success-arrows">
-      <button class="success-arrow" id="successPrev" aria-label="Previous">&#8592;</button>
-      <button class="success-arrow" id="successNext" aria-label="Next">&#8594;</button>
-    </div>
+    <a href="#" class="news-view-all">All Stories <span>→</span></a>
   </div>
 
-  <div class="success-track-wrapper">
-    <div class="success-track" id="successTrack">
+  <div class="news-grid">
 
-
+    <!-- HERO CARD -->
+    <div class="news-card news-card--hero fade-up" onclick="openArticle(0)">
+      <div class="news-card-img">
+        <div class="news-card-img-bg news-img-1"></div>
+        <span class="news-card-category-badge">Match Report</span>
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-meta">
+          <span class="news-card-date">May 2025</span>
+          <span class="news-card-dot"></span>
+          <span class="news-card-read-time">3 min read</span>
+        </div>
+        <h3 class="news-card-title">Bella Nipotina Storms The Goodwood — Unstoppable</h3>
+        <p class="news-card-excerpt">She led from barrier to box. No one got near her. Bella Nipotina put on a masterclass at Morphettville to claim her first Group 1 and cement her place as the best mare in the country. For owners who believed from day one, this was the moment they had been waiting for.</p>
+        <a href="#" class="news-card-cta">Read the full report <span class="news-card-cta-arrow">→</span></a>
+      </div>
     </div>
+
+    <!-- SIDE CARD 1 -->
+    <div class="news-card news-card--side fade-up" onclick="openArticle(1)">
+      <div class="news-card-img">
+        <div class="news-card-img-bg news-img-2"></div>
+        <span class="news-card-category-badge">Get In The Game</span>
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-meta">
+          <span class="news-card-date">May 2025</span>
+          <span class="news-card-dot"></span>
+          <span class="news-card-read-time">2 min read</span>
+        </div>
+        <h3 class="news-card-title">8 Spots Left: Get On Team Emerald Before It's Gone</h3>
+        <p class="news-card-excerpt">Eight spots on the team. One son of I Am Invincible working like a machine every morning. Tony breaks down why this might be the best colt he's had through the stable in years.</p>
+        <a href="#" class="news-card-cta">Enquire now <span class="news-card-cta-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- SIDE CARD 2 -->
+    <div class="news-card news-card--side fade-up" onclick="openArticle(2)">
+      <div class="news-card-img">
+        <div class="news-card-img-bg news-img-3"></div>
+        <span class="news-card-category-badge">Draft Day</span>
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-meta">
+          <span class="news-card-date">April 2025</span>
+          <span class="news-card-dot"></span>
+          <span class="news-card-read-time">4 min read</span>
+        </div>
+        <h3 class="news-card-title">Draft Day: How Tony Picks His Stars at Magic Millions</h3>
+        <p class="news-card-excerpt">Go inside the ropes with Tony at this year's Magic Millions. Pedigree, physique, and 25 years of gut instinct — here's how it works.</p>
+        <a href="#" class="news-card-cta">Read more <span class="news-card-cta-arrow">→</span></a>
+      </div>
+    </div>
+
   </div>
+
 
 </section>
 
@@ -3621,40 +4592,53 @@
 <section class="process-section" id="process">
   <div class="process-inner">
 
-    <!-- Intro split -->
+    <!-- Intro split — tightened -->
     <div class="process-intro fade-up">
       <div class="process-intro-left">
         <p class="section-overline" style="text-align:left;margin-bottom:0.8rem;">How It Works</p>
         <h2 class="process-intro-title">The McEvoy<br><em>Selection Method</em></h2>
         <div class="process-intro-body">
-          <p>Tony and Calvin put a huge amount of work and research into the sales — on a mission to uncover the next Sunlight or Coco Sun. By the time the team decides to bid, every horse has been through a rigorous four-step process.</p>
-          <p>Hours invested in catalogue study, pedigree research and pre-sale inspections at stud farms. Nothing is left to chance.</p>
+          <p>Every horse we run has been through a rigorous four-step process. Tony and Calvin combine decades of track knowledge with expert bloodstock intelligence — so you invest with confidence.</p>
         </div>
       </div>
       <div class="process-intro-right">
         <div class="process-partner">
-          <p class="process-partner-label">Our Intelligence Partner</p>
+          <p class="process-partner-label">Intelligence Partner</p>
           <p class="process-partner-name">Belmont Bloodstock</p>
-          <p class="process-partner-desc">The McEvoys combine their expertise with Belmont Bloodstock — an independent agency owned and run by Damon Gabbedy — to ensure every horse of interest is seen at the busiest sales. His assistant Lauren Fairless provides in-depth pedigree reports on every shortlisted horse.</p>
+          <p class="process-partner-desc">Expert pedigree analysis by Damon Gabbedy and Lauren Fairless — in-depth reports on every shortlisted horse before we bid.</p>
         </div>
       </div>
     </div>
 
     <!-- Four Step Playbook -->
 
-    <!-- Video Reel Section -->
+    <!-- Video Reel Section — 9:16 vertical reel format -->
     <div class="process-video-section fade-up">
-      <p class="process-video-label">Watch The Process</p>
-      <h3 class="process-video-title">Inside The <em>McEvoy Method</em></h3>
+      <div class="process-video-section-left">
+        <p class="process-video-label">Watch The Process</p>
+        <h3 class="process-video-title">Inside The <em>McEvoy Method</em></h3>
+        <p class="process-video-desc">Tony and Calvin take you inside the sales, the stables, and the strategy behind every horse we buy. 25 years of instinct. One mission: find champions.</p>
+        <div class="process-video-stats">
+          <div class="process-video-stat">
+            <span class="process-video-stat-num">750+</span>
+            <span class="process-video-stat-label">Winners</span>
+          </div>
+          <div class="process-video-stat">
+            <span class="process-video-stat-num">25+</span>
+            <span class="process-video-stat-label">Years Experience</span>
+          </div>
+          <div class="process-video-stat">
+            <span class="process-video-stat-num">4</span>
+            <span class="process-video-stat-label">Step Process</span>
+          </div>
+        </div>
+      </div>
 
       <div class="process-video-frame">
         <!-- TO ADD VIDEO: Replace the placeholder div below with:
+             For a vertical Reel/Short:
              <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=0&rel=0"
                      allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-             </iframe>
-             OR for Vimeo:
-             <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID"
-                     allowfullscreen allow="autoplay; fullscreen">
              </iframe>
         -->
         <div class="process-video-placeholder">
@@ -3662,32 +4646,18 @@
             <div class="process-video-play-icon"></div>
           </div>
           <div class="process-video-placeholder-label">
-            <strong>McEvoy Racing — The Selection Process</strong>
-            Tony and Calvin take you inside the sales, the stables, and the strategy behind every horse we buy.
+            <strong>The McEvoy Method</strong>
+            Inside the selection process
           </div>
         </div>
         <!-- Film reel strip at bottom -->
         <div class="process-video-reel-strip">
-          <div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div>
-          <span class="process-video-reel-title">McEvoy Racing — The Selection Process</span>
-          <div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div>
+          <div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div>
+          <span class="process-video-reel-title">McEvoy Racing</span>
+          <div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div><div class="process-video-reel-hole"></div>
         </div>
       </div>
 
-      <div class="process-video-meta">
-        <div class="process-video-meta-item">
-          <span class="process-video-meta-value">25+</span>
-          <span class="process-video-meta-label">Years of experience</span>
-        </div>
-        <div class="process-video-meta-item">
-          <span class="process-video-meta-value">4 Steps</span>
-          <span class="process-video-meta-label">Every horse, every time</span>
-        </div>
-        <div class="process-video-meta-item">
-          <span class="process-video-meta-value">750+</span>
-          <span class="process-video-meta-label">Winners on the board</span>
-        </div>
-      </div>
     </div>
 
     <div class="process-steps-header fade-up">
@@ -3799,6 +4769,7 @@
 <!-- ============================================================
      TONY MCEVOY PROFILE
 ============================================================ -->
+<section style="background:#ffffff; padding: 0 0 4rem;">
 <section class="trainer-section" id="trainer" style="background:#ffffff">
   <div class="trainer-visual">
     <div class="trainer-visual-text">TM</div>
@@ -3841,6 +4812,9 @@
       Meet the Team →
     </a>
   </div>
+</section>
+
+
 </section>
 
 
@@ -4023,178 +4997,52 @@
 </section>
 
 <!-- ============================================================
-     NEWS / ARTICLES
-============================================================ -->
-<section class="section articles-section" id="news">
-  <div class="section-header fade-up">
-    <p class="section-overline">Latest</p>
-    <h2 class="section-title">News &amp; <em>Stories</em></h2>
-  </div>
-
-  <div class="articles-grid">
-    <div class="article-card fade-up" onclick="openArticle(0)" style="cursor:pointer">
-      <div class="article-img">
-        <div class="article-img-bg article-img-bg-1">
-          <svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="opacity:0.08">
-            <path fill="white" d="M380,240 C370,220 355,200 340,195 C350,185 358,170 355,155 C352,140 340,130 325,128 C315,90 295,70 270,65 C265,50 255,40 240,38 C238,30 232,22 220,20 C210,18 200,25 195,35 C185,30 170,32 162,40 C155,48 155,60 160,70 C150,75 140,85 138,100 C130,95 118,98 112,108 C106,118 108,132 116,140 C105,145 95,158 94,172 C93,186 100,200 112,207 C102,215 96,228 98,240 L380,240 Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="article-body">
-        <p class="article-category">Match Report</p>
-        <h3 class="article-title">Bella Nipotina Storms The Goodwood — Unstoppable</h3>
-        <p class="article-excerpt">She led from barrier to box. No one got near her. Bella Nipotina put on a masterclass at Morphettville to claim her first Group 1 and cement her place as the best mare in the country.</p>
-      </div>
-    </div>
-
-    <div class="article-card fade-up" onclick="openArticle(1)" style="cursor:pointer">
-      <div class="article-img">
-        <div class="article-img-bg article-img-bg-2">
-          <svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="opacity:0.08">
-            <path fill="white" d="M380,240 C370,220 355,200 340,195 C350,185 358,170 355,155 C352,140 340,130 325,128 C315,90 295,70 270,65 C265,50 255,40 240,38 C238,30 232,22 220,20 C210,18 200,25 195,35 C185,30 170,32 162,40 C155,48 155,60 160,70 C150,75 140,85 138,100 C130,95 118,98 112,108 C106,118 108,132 116,140 C105,145 95,158 94,172 C93,186 100,200 112,207 C102,215 96,228 98,240 L380,240 Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="article-body">
-        <p class="article-category">Get In The Game</p>
-        <h3 class="article-title">8 Spots Left: Get On Team Emerald Before It's Gone</h3>
-        <p class="article-excerpt">Eight spots on the team. One son of I Am Invincible working like a machine every morning. Tony breaks down why this might be the best colt he's had through the stable in years.</p>
-      </div>
-    </div>
-
-    <div class="article-card fade-up" onclick="openArticle(2)" style="cursor:pointer">
-      <div class="article-img">
-        <div class="article-img-bg article-img-bg-3">
-          <svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="opacity:0.08">
-            <path fill="white" d="M380,240 C370,220 355,200 340,195 C350,185 358,170 355,155 C352,140 340,130 325,128 C315,90 295,70 270,65 C265,50 255,40 240,38 C238,30 232,22 220,20 C210,18 200,25 195,35 C185,30 170,32 162,40 C155,48 155,60 160,70 C150,75 140,85 138,100 C130,95 118,98 112,108 C106,118 108,132 116,140 C105,145 95,158 94,172 C93,186 100,200 112,207 C102,215 96,228 98,240 L380,240 Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="article-body">
-        <p class="article-category">Draft Day</p>
-        <h3 class="article-title">Draft Day: How Tony Picks His Stars at Magic Millions</h3>
-        <p class="article-excerpt">Go inside the ropes with Tony at this year's Magic Millions. How do you spot a champion in a paddock? Pedigree, physique, and 25 years of gut instinct — here's how it works.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CAREERS — Sign For The Team
+     CAREERS — Sign For The Team (Compact)
 ============================================================ -->
 <section class="careers-section" id="careers">
 
   <!-- ── HERO BAND ── -->
-  <div class="careers-hero fade-up">
+  <div class="careers-compact-hero fade-up">
     <div>
-      <p class="section-overline" style="text-align:left;margin-bottom:0.8rem;color:var(--gold)">Now Recruiting</p>
-      <h2 class="careers-hero-title">Sign For<br><em>The Team</em></h2>
-      <p class="careers-hero-sub">McEvoy Racing is more than a stable — it is a squad. We are always looking for passionate, driven people who want to build a career in thoroughbred racing at the highest level. If you love horses and you are serious about the industry, this is your club.</p>
+      <span class="careers-compact-overline">Now Recruiting</span>
+      <h2 class="careers-compact-title">Join The<br><em>Stable</em></h2>
+      <p class="careers-compact-desc">We are always looking for passionate, driven people who want to build a career in thoroughbred racing at the highest level. Group 1 horses. World-class facilities. A team that genuinely cares.</p>
     </div>
-    <div class="careers-hero-right">
-      <div class="careers-stat-row">
-        <div class="careers-stat">
-          <span class="careers-stat-num">4:30</span>
-          <span class="careers-stat-label">AM Start. Every morning.</span>
-        </div>
-        <div class="careers-stat">
-          <span class="careers-stat-num">102</span>
-          <span class="careers-stat-label">Horses in the stable</span>
-        </div>
-        <div class="careers-stat">
-          <span class="careers-stat-num">G1</span>
-          <span class="careers-stat-label">Level training daily</span>
-        </div>
-      </div>
-      <div class="careers-perks">
-        <span class="careers-perk">Competitive Pay</span>
-        <span class="careers-perk">Career Development</span>
-        <span class="careers-perk">Race Day Passes</span>
-        <span class="careers-perk">Elite Horses</span>
-        <span class="careers-perk">Dual State Bases</span>
-        <span class="careers-perk">Real Team Culture</span>
-        <span class="careers-perk">Industry Mentors</span>
-      </div>
+    <div class="careers-compact-cta-area">
+      <button class="careers-compact-btn" onclick="document.getElementById('careersForm').scrollIntoView({behavior:'smooth'})">
+        Apply Now →
+      </button>
+      <a href="mailto:info@mcevoyracing.com.au" class="careers-compact-btn-ghost">
+        Send Your CV
+      </a>
+      <p class="careers-compact-note">We respond within 5 business days</p>
     </div>
   </div>
 
-  <!-- ── STAFF STORIES ── -->
-  <div class="careers-stories">
-    <div class="careers-stories-header fade-up">
+  <!-- ── PERKS STRIP ── -->
+  <div class="careers-compact-perks fade-up">
+    <span class="careers-compact-perks-label">What You Get</span>
+    <span class="careers-compact-perk">Group 1 Horses Daily</span>
+    <span class="careers-compact-perk">Competitive Pay</span>
+    <span class="careers-compact-perk">Race Day Passes</span>
+    <span class="careers-compact-perk">Career Development</span>
+    <span class="careers-compact-perk">Ballarat &amp; Flemington Bases</span>
+    <span class="careers-compact-perk">Real Team Culture</span>
+    <span class="careers-compact-perk">Industry Mentors</span>
+  </div>
+
+  <!-- ── OPEN POSITIONS ── -->
+  <div class="careers-compact-positions">
+    <div class="careers-compact-positions-header fade-up">
       <div>
-        <h3 class="careers-stories-title">Hear From The <em>Squad</em></h3>
-        <p class="careers-stories-sub">Real people. Real careers. Real talk about life at McEvoy Racing.</p>
+        <p class="careers-compact-overline">Open Positions</p>
+        <h3 class="careers-compact-positions-title">Spots On The <em>Team</em></h3>
       </div>
+      <span class="careers-positions-hint">Tap to expand</span>
     </div>
 
-    <div class="careers-stories-grid">
-
-      <!-- Story 1: Ben Thompson -->
-      <div class="story-card fade-up">
-        <div class="story-card-visual">
-          <div class="story-card-bg" style="background:linear-gradient(145deg,#0e1a0a 0%,#1a2a08 50%,#0a1408 100%)"></div>
-          <div class="story-card-visual-overlay"></div>
-          <span class="story-card-jersey">06</span>
-          <span class="story-card-role">Track Rider</span>
-          <div class="story-card-name-block">
-            <span class="story-card-name">Ben Thompson</span>
-            <span class="story-card-since">With the stable 7 years</span>
-          </div>
-        </div>
-        <div class="story-card-body">
-          <p class="story-card-quote">"I grew up riding at a small country track. I never thought I'd be working Group 1 horses at Morphettville. Tony gave me a shot and I haven't looked back."</p>
-          <p class="story-card-desc">Ben started as a casual track rider at 19 and worked his way to Senior Track Rider. He now rides 4–6 horses every morning and is Tony's go-to for the nervous young horses that need a calm, confident pair of hands.</p>
-        </div>
-      </div>
-
-      <!-- Story 2: Lisa Chen -->
-      <div class="story-card fade-up">
-        <div class="story-card-visual">
-          <div class="story-card-bg" style="background:linear-gradient(155deg,#140e08 0%,#1a1008 50%,#0e0a14 100%)"></div>
-          <div class="story-card-visual-overlay"></div>
-          <span class="story-card-jersey">07</span>
-          <span class="story-card-role">Senior Strapper</span>
-          <div class="story-card-name-block">
-            <span class="story-card-name">Lisa Chen</span>
-            <span class="story-card-since">With the stable 6 years</span>
-          </div>
-        </div>
-        <div class="story-card-body">
-          <p class="story-card-quote">"The horses are everything. When Bella Nipotina won the Goodwood, I cried. I had been with her every single morning for two years. That win was mine too."</p>
-          <p class="story-card-desc">Lisa came to McEvoy Racing straight from a horse welfare background. She now manages the full daily care of six horses at Flemington — grooming, feeding, health monitoring, and race-day preparation. The horses love her.</p>
-        </div>
-      </div>
-
-      <!-- Story 3: Ryan Doyle -->
-      <div class="story-card fade-up">
-        <div class="story-card-visual">
-          <div class="story-card-bg" style="background:linear-gradient(140deg,#0a0e14 0%,#0e1408 50%,#140a0e 100%)"></div>
-          <div class="story-card-visual-overlay"></div>
-          <span class="story-card-jersey">08</span>
-          <span class="story-card-role">Trackwork Rider</span>
-          <div class="story-card-name-block">
-            <span class="story-card-name">Ryan Doyle</span>
-            <span class="story-card-since">With the stable 4 years</span>
-          </div>
-        </div>
-        <div class="story-card-body">
-          <p class="story-card-quote">"My mates are sitting in offices. I'm on a Group 1 horse at Flemington at 5am watching the sun come up. I genuinely cannot believe this is my job."</p>
-          <p class="story-card-desc">Ryan finished his apprenticeship at 20 and joined McEvoy Racing because of the calibre of horse. Four years in, he rides 3–4 horses every morning and has become one of Tony's most trusted trackwork riders for the younger horses.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── POSITIONS ── -->
-  <div class="careers-positions">
-    <div class="careers-positions-header fade-up">
-      <p class="section-overline" style="text-align:left;margin-bottom:0.6rem;color:var(--gold)">Open Positions</p>
-      <h3 class="careers-positions-title">Spots On The <em>Team</em></h3>
-    </div>
-
-    <div class="fade-up">
-
+    <div class="fade-up" id="positionsList">
+      <!-- Populated via JS SITE_CONFIG -->
     </div>
   </div>
 
@@ -4202,8 +5050,8 @@
   <div class="careers-apply" id="careersForm">
     <div class="careers-apply-left fade-up">
       <p class="section-overline" style="text-align:left;margin-bottom:0.8rem;color:var(--gold)">Ready To Sign</p>
-      <h3 class="careers-apply-title">Submit Your<br><em>Highlights Reel</em></h3>
-      <p class="careers-apply-desc">Fill out the form, upload your CV, and tell us why you want to be part of the squad. We read every application personally. If you are the right fit, you will hear from us within five business days.</p>
+      <h3 class="careers-apply-title">Submit Your<br><em>Application</em></h3>
+      <p class="careers-apply-desc">We read every application personally. If you're the right fit, you'll hear from us within five business days.</p>
       <div class="careers-get-list">
         <div class="careers-get-item">
           <span class="careers-get-dot">✓</span>
@@ -4219,15 +5067,7 @@
         </div>
         <div class="careers-get-item">
           <span class="careers-get-dot">✓</span>
-          Career development and industry connections
-        </div>
-        <div class="careers-get-item">
-          <span class="careers-get-dot">✓</span>
           World-class facilities at Ballarat and Flemington
-        </div>
-        <div class="careers-get-item">
-          <span class="careers-get-dot">✓</span>
-          Competitive pay and a real team culture
         </div>
       </div>
     </div>
@@ -4238,15 +5078,15 @@
 
         <div class="form-group">
           <label class="form-label">Full Name</label>
-          <input class="form-input" type="text" placeholder="Your full name" id="cf-name">
+          <input class="form-input" type="text" placeholder="Your full name" id="cf-name" autocomplete="name">
         </div>
         <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input class="form-input" type="email" placeholder="your@email.com" id="cf-email">
+          <input class="form-input" type="email" placeholder="your@email.com" id="cf-email" autocomplete="email">
         </div>
         <div class="form-group">
           <label class="form-label">Phone Number</label>
-          <input class="form-input" type="tel" placeholder="Your phone number" id="cf-phone">
+          <input class="form-input" type="tel" placeholder="Your phone number" id="cf-phone" autocomplete="tel">
         </div>
         <div class="form-group">
           <label class="form-label">Position of Interest</label>
@@ -4261,29 +5101,29 @@
         </div>
         <div class="form-group">
           <label class="form-label">Your Experience</label>
-          <textarea class="form-textarea" placeholder="Tell us about your background with horses and why you want to join McEvoy Racing..." id="cf-message"></textarea>
+          <textarea class="form-textarea" placeholder="Tell us about your background and why you want to join..." id="cf-message"></textarea>
         </div>
         <div class="form-group">
-          <label class="form-label">Upload Your CV / Highlights Reel</label>
+          <label class="form-label">Upload Your CV</label>
           <div class="form-upload" id="cfUpload">
             <input type="file" accept=".pdf,.doc,.docx" onchange="handleUpload(this)">
             <span class="form-upload-icon">↑</span>
-            <span class="form-upload-text" id="cfUploadText">Drop your CV here or click to upload</span>
-            <span class="form-upload-sub">PDF or Word document · Max 5MB</span>
+            <span class="form-upload-text" id="cfUploadText">Drop your CV or click to upload</span>
+            <span class="form-upload-sub">PDF or Word · Max 5MB</span>
           </div>
         </div>
 
         <button class="form-submit" onclick="submitApplication()">
-          Sign Me Up →
+          Submit Application →
         </button>
-        <p class="form-note">We respect your privacy. Your details are only used for recruitment purposes.</p>
+        <p class="form-note">Your details are used for recruitment purposes only.</p>
       </div>
 
       <!-- Success state -->
       <div class="form-success" id="careersSuccess">
         <span class="form-success-icon">✓</span>
         <p class="form-success-title">Application Received</p>
-        <p class="form-success-sub">Thanks for putting your hand up. We have received your application and will be in touch within five business days. Welcome to the squad — almost.</p>
+        <p class="form-success-sub">Thanks for putting your hand up. We will be in touch within five business days. Welcome to the squad — almost.</p>
       </div>
     </div>
   </div>
@@ -5484,8 +6324,134 @@ For owners who want to be part of this process from the very beginning, private 
     if (raceData[key]) buildPanel(raceData[key]);
   }
 
+  // ── SHARES CAROUSEL — rendered at the base of every article panel ──
+  function buildSharesCarousel() {
+    const synds = SITE_CONFIG.syndicates.filter(s => s.active);
+    if (!synds.length) return '';
+
+    // Gradient backgrounds for each syndicate card
+    const gradients = [
+      'linear-gradient(145deg,#2a1808 0%,#1a1208 60%,#0e1008 100%)',
+      'linear-gradient(145deg,#0a1220 0%,#0a1018 60%,#080e14 100%)',
+      'linear-gradient(145deg,#1a2a08 0%,#0e1a08 60%,#0a1408 100%)',
+      'linear-gradient(145deg,#1a0a14 0%,#14080e 60%,#0e0a18 100%)',
+    ];
+
+    const cards = synds.map((s, i) => {
+      const pct   = s.spotsTotal ? Math.round((s.spotsTaken / s.spotsTotal) * 100) : 0;
+      const left  = s.spotsTotal ? s.spotsTotal - s.spotsTaken : null;
+      const spotsLabel = left !== null ? `${left} of ${s.spotsTotal} shares left` : null;
+      const grad  = gradients[i % gradients.length];
+
+      const progressHTML = s.spotsTotal ? `
+        <div class="psc-progress">
+          <div class="psc-progress-label">
+            <span>Shares Taken</span>
+            <span>${s.spotsTaken}/${s.spotsTotal}</span>
+          </div>
+          <div class="psc-progress-track">
+            <div class="psc-progress-fill" style="width:0%" data-fill="${pct}"></div>
+          </div>
+        </div>` : '';
+
+      const ctaClass = s.badgeType === 'bespoke' ? 'psc-cta ghost' : 'psc-cta';
+      const ctaText  = s.badgeType === 'bespoke' ? 'Enquire Privately' : 'View Horse';
+
+      return `
+        <div class="psc" onclick="closePanel(); setTimeout(()=>{ document.getElementById('syndicates').scrollIntoView({behavior:'smooth'}); },300);" role="button" tabindex="0">
+          <div class="psc-img">
+            <div class="psc-img-bg" style="background:${grad}"></div>
+            <span class="psc-badge ${s.badgeType}">${s.badgeText}</span>
+            ${spotsLabel ? `<span class="psc-avail">${spotsLabel}</span>` : ''}
+          </div>
+          <div class="psc-body">
+            <p class="psc-name">${s.name}</p>
+            <p class="psc-breed">${s.breeding}</p>
+            <p class="psc-desc">${s.desc}</p>
+            ${progressHTML}
+            <button class="${ctaClass}" onclick="event.stopPropagation(); closePanel(); setTimeout(()=>{ document.getElementById('syndicates').scrollIntoView({behavior:'smooth'}); },300);">
+              ${ctaText} <span class="psc-cta-arrow">→</span>
+            </button>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Dots for scroll indicator
+    const dots = synds.map((_, i) =>
+      `<span class="panel-shares-dot${i === 0 ? ' active' : ''}"></span>`
+    ).join('');
+
+    return `
+      <div class="panel-shares">
+        <div class="panel-shares-header">
+          <div>
+            <span class="panel-shares-overline">Available Now</span>
+            <h3 class="panel-shares-title">Join A <em>Syndicate</em></h3>
+          </div>
+          <button class="panel-shares-view-all" onclick="closePanel(); setTimeout(()=>{ document.getElementById('syndicates').scrollIntoView({behavior:'smooth'}); },300);">
+            View All →
+          </button>
+        </div>
+        <div class="panel-shares-strip" id="panelSharesStrip">${cards}</div>
+        <div class="panel-shares-dots" id="panelSharesDots">${dots}</div>
+      </div>`;
+  }
+
   function openArticle(index) {
-    if (articleData[index]) buildPanel(articleData[index]);
+    if (!articleData[index]) return;
+    const data = articleData[index];
+
+    const panelLabel = getPanelLabel();
+    const panelBody  = getPanelBody();
+    if (!panelLabel || !panelBody) return;
+
+    panelLabel.textContent = data.label || 'Article';
+    setPanelImage(data.bgClass, data.badge, data.result);
+
+    let html = '';
+    if (data.overline) html += `<p class="panel-overline">${data.overline}</p>`;
+    if (data.title)    html += `<h2 class="panel-title">${data.title}</h2>`;
+    if (data.subtitle) html += `<p class="panel-subtitle">${data.subtitle}</p>`;
+    if (data.stats)    html += statsRow(data.stats);
+    if (data.desc) {
+      html += '<div class="panel-divider"></div>';
+      data.desc.split('\n\n').forEach(p => {
+        html += `<p class="panel-desc">${p}</p>`;
+      });
+    }
+    if (data.rows) {
+      html += '<div class="panel-divider"></div>';
+      html += infoRows(data.rows);
+    }
+
+    // Inject the Available Shares carousel instead of old horse chips
+    html += buildSharesCarousel();
+
+    panelBody.innerHTML = html;
+    openPanel();
+
+    // Animate progress bars after paint
+    requestAnimationFrame(() => {
+      panelBody.querySelectorAll('.psc-progress-fill[data-fill]').forEach(bar => {
+        bar.style.width = bar.dataset.fill + '%';
+      });
+
+      // Sync dot indicator to scroll position
+      const strip = document.getElementById('panelSharesStrip');
+      const dotsEl = document.getElementById('panelSharesDots');
+      if (strip && dotsEl) {
+        strip.addEventListener('scroll', () => {
+          const dotEls = dotsEl.querySelectorAll('.panel-shares-dot');
+          const cards  = strip.querySelectorAll('.psc');
+          let closest = 0, closestDist = Infinity;
+          cards.forEach((card, i) => {
+            const dist = Math.abs(card.getBoundingClientRect().left - strip.getBoundingClientRect().left);
+            if (dist < closestDist) { closestDist = dist; closest = i; }
+          });
+          dotEls.forEach((dot, i) => dot.classList.toggle('active', i === closest));
+        }, { passive: true });
+      }
+    });
   }
 
   function openSuccessCard(name) {
@@ -6061,8 +7027,47 @@ For owners who want to be part of this process from the very beginning, private 
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   fadeEls.forEach(el => observer.observe(el));
+
+  // ── BACK TO TOP ─────────────────────────────────────────────
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) btt.classList.add('visible');
+    else btt.classList.remove('visible');
+  }, { passive: true });
+
+  // ── RENDER POSITIONS IN CAREERS SECTION ─────────────────────
+  (function() {
+    const container = document.getElementById('positionsList');
+    if (!container || !SITE_CONFIG.openPositions) return;
+    SITE_CONFIG.openPositions.forEach(pos => {
+      if (!pos.active) return;
+      const card = document.createElement('div');
+      card.className = 'position-card';
+      card.innerHTML = `
+        <div class="position-header" onclick="togglePosition(this.parentElement)">
+          <div>
+            <p class="position-title">${pos.title}</p>
+            <p class="position-type">${pos.type} &middot; ${pos.location}</p>
+          </div>
+          <span class="position-badge ${pos.status === 'now' ? 'now' : 'always'}">${pos.status === 'now' ? 'Now Hiring' : 'Always Open'}</span>
+          <div class="position-toggle">+</div>
+        </div>
+        <div class="position-body">
+          <p class="position-desc">${pos.desc}</p>
+          <div class="position-requirements">
+            ${(pos.requirements||[]).map(r=>`<span class="position-req">${r}</span>`).join('')}
+          </div>
+          <button class="position-apply-btn" onclick="scrollToApply('${pos.title}')">Apply For This Role →</button>
+        </div>`;
+      container.appendChild(card);
+    });
+  })();
+
 </script>
 
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
 <!-- ============================================================
      SLIDE PANEL — universal detail overlay
