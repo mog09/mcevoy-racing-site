@@ -1,1 +1,3 @@
-# mcevoy-racing-site
+# McEvoy Racing
+
+Premium thoroughbred racing website.
